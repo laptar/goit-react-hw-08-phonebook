@@ -1,0 +1,21 @@
+.header {
+  border-bottom: 1px solid black;
+}
+.headerNav {
+  display: flex;
+  justify-content: space-between;
+  max-width: 1280px;
+  margin: 0 auto;
+
+  padding: 5px 20px;
+}
+
+.headerLink {
+  display: flex;
+  gap: 30px;
+}
+
+.headerReg {
+  display: flex;
+  gap: 30px;
+}

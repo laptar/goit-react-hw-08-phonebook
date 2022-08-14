@@ -6,6 +6,8 @@ import { ContactForm } from './components/ContactForm/ContactForm';
 import { Filter } from './components/Filter/Filter';
 import { ContactList } from './components/ContactList/ContactList';
 import { HomePage } from 'pages/HomePage/HomePage';
+import { Contacts } from 'pages/Contacts/Contacts';
+import { Register } from 'pages/Register/Register';
 
 export const App = () => {
   return (
@@ -13,6 +15,8 @@ export const App = () => {
       <Routes>
         <Route path="/" element={<Layout />}>
           <Route index element={<HomePage></HomePage>} />
+          <Route path="contacts" element={<Contacts></Contacts>} />
+          <Route path="register" element={<Register></Register>} />
         </Route>
       </Routes>
       {/* <h1>Phonebook</h1>
