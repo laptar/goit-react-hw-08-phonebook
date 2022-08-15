@@ -31,7 +31,11 @@ export const Header = () => {
       <nav className={s.headerNav}>
         <div className={s.headerLink}>
           <NavLink to="/goit-react-hw-08-phonebook/">Home</NavLink>
-          {token && <NavLink to="/contacts">Contacts</NavLink>}
+          {token && (
+            <NavLink to="/goit-react-hw-08-phonebook/contacts">
+              Contacts
+            </NavLink>
+          )}
         </div>
 
         <div>
