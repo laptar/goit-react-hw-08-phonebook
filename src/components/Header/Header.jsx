@@ -24,7 +24,7 @@ export const Header = () => {
     logout();
     dispatch(addToken(''));
     dispatch(getUserAction({ name: '', email: '' }));
-    navigate('/');
+    navigate('/goit-react-hw-08-phonebook/');
   };
   return (
     <header className={s.header}>
