@@ -23,7 +23,6 @@ export const ContactForm = () => {
       alert(`${name} is already in contacts`);
     } else {
       addContact({ name, number });
-      console.log({ name, number });
       reset();
     }
   };

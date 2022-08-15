@@ -30,7 +30,7 @@ export const Header = () => {
     <header className={s.header}>
       <nav className={s.headerNav}>
         <div className={s.headerLink}>
-          <NavLink to="/">Home</NavLink>
+          <NavLink to="/goit-react-hw-08-phonebook/">Home</NavLink>
           {token && <NavLink to="/contacts">Contacts</NavLink>}
         </div>
 
@@ -47,8 +47,10 @@ export const Header = () => {
             </div>
           ) : (
             <div className={s.headerReg}>
-              <NavLink to="/register">Register</NavLink>
-              <NavLink to="/login">Login</NavLink>
+              <NavLink to="/goit-react-hw-08-phonebook/register">
+                Register
+              </NavLink>
+              <NavLink to="/goit-react-hw-08-phonebook/login">Login</NavLink>
             </div>
           )}
         </div>

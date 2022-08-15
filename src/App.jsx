@@ -41,7 +41,7 @@ export const App = () => {
             }
           />
         </Route>
-        <Route path="*" element={<Layout />}></Route>
+        <Route path="*" element={<h2>404</h2>}></Route>
       </Routes>
     </>
   );

@@ -36,7 +36,7 @@ export const Login = () => {
     dispatch(getUserAction(data.user));
     dispatch(addToken(data.token));
 
-    navigate('/contacts');
+    navigate('/goit-react-hw-08-phonebook/contacts');
   };
   return (
     <div className="section">
