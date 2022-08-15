@@ -5,7 +5,6 @@ import { ContactItem } from 'components/ContactItem/ContactItem';
 import { searchNameSelector } from 'redux/selectors';
 
 export const ContactList = () => {
-  const token = useSelector(state => state.token);
   const { data: contacts = [] } = useGetContactsQuery();
   const serchName = useSelector(searchNameSelector);
   const filteredContacts = contacts.filter(({ name }) =>

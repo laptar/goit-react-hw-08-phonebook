@@ -1,4 +1,4 @@
-import s from './HomePage.module.css';
+// import s from './HomePage.module.css';
 export const HomePage = () => {
   return (
     <div className="section">

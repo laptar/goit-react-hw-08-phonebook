@@ -4,7 +4,7 @@ import s from './Login.module.css';
 
 import { addToken } from 'redux/reducer';
 import { useLoginUserMutation } from 'redux/authApi';
-import { useDispatch, useSelector } from 'react-redux';
+import { useDispatch } from 'react-redux';
 export const Login = () => {
   const dispatch = useDispatch();
   const [loginUsers] = useLoginUserMutation();
@@ -14,7 +14,6 @@ export const Login = () => {
   });
 
   const [formIsComplite, setFormIsComplite] = useState(false);
-  const token = useSelector(state => state.token);
 
   const handleChangeInput = e => {
     setInpytForm(prev => ({ ...prev, [e.target.name]: e.target.value }));

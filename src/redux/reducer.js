@@ -1,4 +1,4 @@
-import { createReducer, combineReducers, createSlice } from '@reduxjs/toolkit';
+import { combineReducers, createSlice } from '@reduxjs/toolkit';
 import { authApi } from './authApi';
 
 import { persistReducer } from 'redux-persist';

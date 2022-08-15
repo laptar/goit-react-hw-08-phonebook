@@ -1,5 +1,4 @@
 import { createApi, fetchBaseQuery } from '@reduxjs/toolkit/query/react';
-import { useSelector } from 'react-redux';
 
 export const authApi = createApi({
   reducerPath: 'authApi',
@@ -9,7 +8,6 @@ export const authApi = createApi({
       const token = getState().token;
       console.log(token);
 
-      // If we have a token set in state, let's assume that we should be passing it.
       if (token) {
         headers.set('authorization', `Bearer ${token}`);
       }
