@@ -1,16 +1,16 @@
 import { useState } from 'react';
-import { useAddContactsMutation, useGetContactsQuery } from 'redux/contactsApi';
+import { useAddContactsMutation, useGetContactsQuery } from 'redux/authApi';
 
 export const ContactForm = () => {
   const [addContact] = useAddContactsMutation();
   const { data: contacts = [] } = useGetContactsQuery();
 
   const [name, setName] = useState('');
-  const [phone, setPhone] = useState('');
+  const [number, setNumber] = useState('');
 
   const inputName = {
     name: setName,
-    phone: setPhone,
+    number: setNumber,
   };
   const handleChangeInput = e => {
     const { name, value } = e.target;
@@ -22,13 +22,14 @@ export const ContactForm = () => {
     if (contacts.find(el => el.name.toLowerCase() === name.toLowerCase())) {
       alert(`${name} is already in contacts`);
     } else {
-      addContact({ name, phone });
+      addContact({ name, number });
+      console.log({ name, number });
       reset();
     }
   };
   const reset = () => {
     setName('');
-    setPhone('');
+    setNumber('');
   };
 
   return (
@@ -49,11 +50,11 @@ export const ContactForm = () => {
         Namber
         <input
           type="tel"
-          name="phone"
+          name="number"
           pattern="\+?\d{1,4}?[-.\s]?\(?\d{1,3}?\)?[-.\s]?\d{1,4}[-.\s]?\d{1,4}[-.\s]?\d{1,9}"
           title="Phone number must be digits and can contain spaces, dashes, parentheses and can start with +"
           required
-          value={phone}
+          value={number}
           onChange={handleChangeInput}
         />
       </label>

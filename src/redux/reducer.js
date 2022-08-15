@@ -1,25 +1,39 @@
-import { initialState } from './initial-state';
-import { createReducer, combineReducers } from '@reduxjs/toolkit';
-import { contactsApi } from './contactsApi';
+import { createReducer, combineReducers, createSlice } from '@reduxjs/toolkit';
+import { authApi } from './authApi';
+
 import { persistReducer } from 'redux-persist';
 
 import storage from 'redux-persist/lib/storage';
 
-import { filterContactAction } from './actions';
+const contactsSlice = createSlice({
+  name: 'token',
+  initialState: '',
+  reducers: {
+    addToken: (_, action) => action.payload,
+  },
+});
 
-const filterReducer = createReducer(initialState.filter, {
-  [filterContactAction]: (_, action) => action.payload,
+const filterSlice = createSlice({
+  name: 'filter',
+  initialState: '',
+  reducers: {
+    filterContactAction: (_, action) => action.payload,
+  },
 });
 
 export const reducer = combineReducers({
-  filter: filterReducer,
-  [contactsApi.reducerPath]: contactsApi.reducer,
+  filter: filterSlice.reducer,
+
+  token: contactsSlice.reducer,
+  [authApi.reducerPath]: authApi.reducer,
 });
 
 const persistConfig = {
   key: 'contacts',
   storage,
-  blacklist: ['filter'],
+  whitelist: ['token'],
 };
 
 export const persiReducer = persistReducer(persistConfig, reducer);
+export const { addToken } = contactsSlice.actions;
+export const { filterContactAction } = filterSlice.actions;

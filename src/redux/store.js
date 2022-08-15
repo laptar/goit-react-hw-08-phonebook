@@ -10,7 +10,9 @@ import {
   REGISTER,
 } from 'redux-persist';
 
-import { contactsApi } from './contactsApi';
+// import { contactsApi } from './contactsApi';
+import { authApi } from './authApi';
+
 // import { reducer } from './reducer';
 
 export const store = configureStore({
@@ -21,7 +23,9 @@ export const store = configureStore({
       serializableCheck: {
         ignoredActions: [FLUSH, REHYDRATE, PAUSE, PERSIST, PURGE, REGISTER],
       },
-    }).concat(contactsApi.middleware),
+    })
+      // .concat(contactsApi.middleware)
+      .concat(authApi.middleware),
 });
 
 export const persistor = persistStore(store);

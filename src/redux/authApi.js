@@ -1,14 +1,27 @@
 import { createApi, fetchBaseQuery } from '@reduxjs/toolkit/query/react';
+import { useSelector } from 'react-redux';
 
 export const authApi = createApi({
-  reducerPath: 'contactsApi',
+  reducerPath: 'authApi',
   baseQuery: fetchBaseQuery({
     baseUrl: 'https://connections-api.herokuapp.com',
+    prepareHeaders: (headers, { getState }) => {
+      const token = getState().token;
+      console.log(token);
+
+      // If we have a token set in state, let's assume that we should be passing it.
+      if (token) {
+        headers.set('authorization', `Bearer ${token}`);
+      }
+
+      return headers;
+    },
   }),
+
   tagTypes: ['Contact'],
   endpoints: builder => ({
     getContacts: builder.query({
-      query: () => `contacts`,
+      query: () => 'contacts',
       providesTags: result =>
         result
           ? [
@@ -16,6 +29,27 @@ export const authApi = createApi({
               { type: 'Contact', id: 'LIST' },
             ]
           : [{ type: 'Contact', id: 'LIST' }],
+    }),
+    registerUser: builder.mutation({
+      query: ({ name, email, password }) => ({
+        url: '/users/signup',
+        method: 'POST',
+        body: {
+          name,
+          email,
+          password,
+        },
+      }),
+    }),
+    loginUser: builder.mutation({
+      query: ({ email, password }) => ({
+        url: '/users/login',
+        method: 'POST',
+        body: {
+          email,
+          password,
+        },
+      }),
     }),
     addContacts: builder.mutation({
       query: body => ({
@@ -35,8 +69,10 @@ export const authApi = createApi({
   }),
 });
 
-// export const {
-//   useGetContactsQuery,
-//   useAddContactsMutation,
-//   useDeleteContactsMutation,
-// } = contactsApi;
+export const {
+  useGetContactsQuery,
+  useAddContactsMutation,
+  useDeleteContactsMutation,
+  useRegisterUserMutation,
+  useLoginUserMutation,
+} = authApi;

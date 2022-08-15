@@ -1,11 +1,10 @@
 import { useSelector, useDispatch } from 'react-redux';
-
-import { filterContactAction } from '../../redux/actions';
-import { searchNameSelector } from 'redux/selectors';
+import { filterContactAction } from 'redux/reducer';
 
 export const Filter = () => {
   const dispatch = useDispatch();
-  const serchName = useSelector(searchNameSelector);
+  const serchName = useSelector(state => state.Filter);
+  console.log(serchName);
 
   const handleChangeInput = e => {
     dispatch(filterContactAction(e.target.value));
