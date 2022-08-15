@@ -1,9 +1,15 @@
 import { useEffect } from 'react';
 import { useState } from 'react';
+import { useDispatch } from 'react-redux';
+import { useNavigate } from 'react-router-dom';
 import s from './Register.module.css';
 
+import { addToken, getUserAction } from 'redux/reducer';
 import { useRegisterUserMutation } from 'redux/authApi';
+
 export const Register = () => {
+  const dispatch = useDispatch();
+  const navigate = useNavigate();
   const [registerUser] = useRegisterUserMutation();
   const [inputForm, setInpytForm] = useState({
     name: '',
@@ -31,10 +37,12 @@ export const Register = () => {
     }
   }, [inputForm]);
 
-  const handleSubmit = e => {
+  const handleSubmit = async e => {
     e.preventDefault();
-    registerUser(inputForm);
-    console.log('123');
+    const { data } = await registerUser(inputForm);
+    dispatch(getUserAction(data.user));
+    dispatch(addToken(data.token));
+    navigate('/contacts');
   };
   return (
     <div className="section">

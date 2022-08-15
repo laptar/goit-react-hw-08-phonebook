@@ -7,16 +7,39 @@ import { HomePage } from 'pages/HomePage/HomePage';
 import { Contacts } from 'pages/Contacts/Contacts';
 import { Register } from 'pages/Register/Register';
 import { Login } from 'pages/Login/Login';
+import { PrivateRout } from 'components/PrivateRout/Privaterout';
+import { PublicRout } from 'components/PublicRoute/PublicRoute';
 
 export const App = () => {
   return (
     <>
       <Routes>
         <Route path="/" element={<Layout />}>
-          <Route index element={<HomePage></HomePage>} />
-          <Route path="contacts" element={<Contacts></Contacts>} />
-          <Route path="register" element={<Register></Register>} />
-          <Route path="login" element={<Login></Login>} />
+          <Route index element={<HomePage />} />
+          <Route
+            path="contacts"
+            element={
+              <PrivateRout>
+                <Contacts />
+              </PrivateRout>
+            }
+          />
+          <Route
+            path="register"
+            element={
+              <PublicRout>
+                <Register />
+              </PublicRout>
+            }
+          />
+          <Route
+            path="login"
+            element={
+              <PublicRout>
+                <Login />
+              </PublicRout>
+            }
+          />
         </Route>
       </Routes>
     </>

@@ -20,10 +20,17 @@ const filterSlice = createSlice({
     filterContactAction: (_, action) => action.payload,
   },
 });
+const userSlice = createSlice({
+  name: 'user',
+  initialState: { name: '', email: '' },
+  reducers: {
+    getUserAction: (_, action) => action.payload,
+  },
+});
 
 export const reducer = combineReducers({
   filter: filterSlice.reducer,
-
+  user: userSlice.reducer,
   token: contactsSlice.reducer,
   [authApi.reducerPath]: authApi.reducer,
 });
@@ -37,3 +44,4 @@ const persistConfig = {
 export const persiReducer = persistReducer(persistConfig, reducer);
 export const { addToken } = contactsSlice.actions;
 export const { filterContactAction } = filterSlice.actions;
+export const { getUserAction } = userSlice.actions;

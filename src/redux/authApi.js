@@ -6,7 +6,6 @@ export const authApi = createApi({
     baseUrl: 'https://connections-api.herokuapp.com',
     prepareHeaders: (headers, { getState }) => {
       const token = getState().token;
-      console.log(token);
 
       if (token) {
         headers.set('authorization', `Bearer ${token}`);
@@ -19,7 +18,7 @@ export const authApi = createApi({
   tagTypes: ['Contact'],
   endpoints: builder => ({
     getContacts: builder.query({
-      query: () => 'contacts',
+      query: () => '/contacts',
       providesTags: result =>
         result
           ? [
@@ -27,6 +26,9 @@ export const authApi = createApi({
               { type: 'Contact', id: 'LIST' },
             ]
           : [{ type: 'Contact', id: 'LIST' }],
+    }),
+    getUsers: builder.query({
+      query: () => '/users/current',
     }),
     registerUser: builder.mutation({
       query: ({ name, email, password }) => ({
@@ -49,9 +51,16 @@ export const authApi = createApi({
         },
       }),
     }),
+    logoutUser: builder.mutation({
+      query: () => ({
+        url: '/users/logout',
+        method: 'POST',
+      }),
+      invalidatesTags: [{ type: 'Contact', id: 'LIST' }],
+    }),
     addContacts: builder.mutation({
       query: body => ({
-        url: 'contacts',
+        url: '/contacts',
         method: 'POST',
         body,
       }),
@@ -59,7 +68,7 @@ export const authApi = createApi({
     }),
     deleteContacts: builder.mutation({
       query: id => ({
-        url: `contacts/${id}`,
+        url: `/contacts/${id}`,
         method: 'DELETE',
       }),
       invalidatesTags: [{ type: 'Contact', id: 'LIST' }],
@@ -73,4 +82,6 @@ export const {
   useDeleteContactsMutation,
   useRegisterUserMutation,
   useLoginUserMutation,
+  useLogoutUserMutation,
+  useGetUsersQuery,
 } = authApi;

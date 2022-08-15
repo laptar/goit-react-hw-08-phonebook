@@ -1,11 +1,14 @@
 import { useEffect } from 'react';
 import { useState } from 'react';
+
 import s from './Login.module.css';
 
-import { addToken } from 'redux/reducer';
+import { addToken, getUserAction } from 'redux/reducer';
 import { useLoginUserMutation } from 'redux/authApi';
 import { useDispatch } from 'react-redux';
+import { useNavigate } from 'react-router-dom';
 export const Login = () => {
+  const navigate = useNavigate();
   const dispatch = useDispatch();
   const [loginUsers] = useLoginUserMutation();
   const [inputForm, setInpytForm] = useState({
@@ -30,7 +33,10 @@ export const Login = () => {
   const handleSubmit = async e => {
     e.preventDefault();
     const { data } = await loginUsers(inputForm);
+    dispatch(getUserAction(data.user));
     dispatch(addToken(data.token));
+
+    navigate('/contacts');
   };
   return (
     <div className="section">

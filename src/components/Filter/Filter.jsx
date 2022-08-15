@@ -4,7 +4,6 @@ import { filterContactAction } from 'redux/reducer';
 export const Filter = () => {
   const dispatch = useDispatch();
   const serchName = useSelector(state => state.Filter);
-  console.log(serchName);
 
   const handleChangeInput = e => {
     dispatch(filterContactAction(e.target.value));
