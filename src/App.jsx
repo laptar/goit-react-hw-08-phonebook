@@ -32,7 +32,14 @@ export const App = () => {
               </PublicRout>
             }
           />
-          <Route path="login" element={<Login />} />
+          <Route
+            path="login"
+            element={
+              <PublicRout>
+                <Login />
+              </PublicRout>
+            }
+          />
         </Route>
       </Routes>
     </>
